@@ -1,2 +1,2 @@
 # 3D_Panel_Method
-Continuum Mechanics II Project
+Continuum Mechanics II : Group Project
