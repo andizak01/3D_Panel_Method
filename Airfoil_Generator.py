@@ -9,8 +9,8 @@ def NACA4Digit(Na,m,p,t):
     y = np.zeros(Na)
 
     for i in range(Na):
-        x[i] = (1/2)*(math.cos((i/Na)*2*math.pi)+1)
-        if i == 0 :
+        x[i] = (1/2)*(math.cos((i/(Na-1))*2*math.pi)+1)
+        if i == 0 or i==Na-1:
             y[i] = 0
         else :    
             yt = (t/0.2)*(0.2969*math.sqrt(x[i])-0.126*x[i]-0.35160*(x[i]**2)+0.2843*(x[i]**3)-0.1015*(x[i]**4))

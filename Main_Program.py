@@ -17,7 +17,7 @@ alpha = alpha*math.pi/180.0 # Convert AoA to radian
 m = 2/100   # Maximum Camber
 p = 40/100  # Location of Maximum Camber
 t = 12/100  # Maximum Thickness
-Na = 50     # Number of Airfoil Points
+Na = 51     # Number of Airfoil Points (Odd) (1==Na)
 
 # Wing Parameter
 b = 2.0         # Wing Span
@@ -30,7 +30,8 @@ ct = Lambda*cr # Chord Tip
 theta = theta*math.pi/180.0 # Convert Sweep Angle to radian
 
 # 1. Create Airfoil
-xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)
-
+xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil Coordinate (x/c,y/c)
+plt.show()
 # 2. Create Wing and Panel
-xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)
+xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
+S,nx,ny,nz = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw)         
