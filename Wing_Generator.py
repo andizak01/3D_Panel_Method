@@ -5,8 +5,6 @@ import math
 from matplotlib import cm
 import matplotlib.pyplot as plt
 
-
-
 def Geo_Wing(xa,ya,Np,b,cr,ct,theta):
     
     # Airfoil Parameter 

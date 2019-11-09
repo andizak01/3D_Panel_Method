@@ -31,7 +31,7 @@ theta = theta*math.pi/180.0 # Convert Sweep Angle to radian
 
 # 1. Create Airfoil
 xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil Coordinate (x/c,y/c)
-plt.show()
+
 # 2. Create Wing and Panel
 xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
 S,nx,ny,nz = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw)         
