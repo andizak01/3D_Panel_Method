@@ -43,7 +43,29 @@
 \section{Literature Review}
 
 \section{Methodology}
-
+\subsection{Geometry}
+The calculation of panel surface is done by module of cross product of panel diagonals with following expression :
+\begin{equation}
+S = \frac{|\textbf{A}\times \textbf{B}|}{2}
+\end{equation}
+where $S$ is surface, $\textbf{A}$ and $\textbf{B}$ panel diagonals
+\\ Calculation of collocation point $\textbf{c}$ is done by mean value of the panel coordinates :
+\begin{equation}
+c_x = \frac{x_1+x_2+x_3+x_4}{4} , c_y = \frac{y_1+y_2+y_3+y_4}{4} ,c_z = \frac{z_1+z_2+z_3+z_4}{4}
+\end{equation}
+where,$c_x,c_y,c_z$ are coordinates of collocation point of the panel and $x_i,y_i,z_i$ are coordinates of panel vertices 
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=100mm,scale=0.5]{panelvectors.png}
+	\caption{Collocation point $\textbf{c}$ and unit vectors of panel}
+	\label{fig:panelvector}
+\end{figure}
+\\ Calculation of unit vectors in longitudinal $\textbf{u}$ and transverse $\textbf{p}$ direction is performed by :
+\begin{align}
+u_x = \frac{x_1+x_2-x_3-x_4}{2},u_y = \frac{y_1+y_2-y_3-y_4}{2},u_z = \frac{z_1+z_2-z_3-z_4}{2}
+\\ p_x = \frac{x_2+x_3-x_1-x_4}{2},p_y = \frac{y_2+y_3-y_1-y_4}{2},p_z = \frac{z_2+z_3-z_1-z_4}{2}
+\end{align} 
+ 
 %\begin{algorithm}[H]
 %\SetAlgoLined
 %\KwIn{Wing and Flap Chord ($c$ and $cf_c$), \\
@@ -74,7 +96,7 @@
 \section{References}
 
 \begin{itemize}
-    \item , W. S. (1994), \textit{Handbook of Grid Generation}, Springer-Verlag: New York.
+    \item 
 \end{itemize}
 
 \section{Numerical Code}
