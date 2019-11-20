@@ -73,9 +73,9 @@ def Panel_Wing(Na,Np,x,y,z):
             mag_n = np.linalg.norm(n)
             S[i][j] = mag_n/2
             # Normal Vector
-            nx[i][j] = n[0]/mag_n 
-            ny[i][j] = n[1]/mag_n
-            nz[i][j] = n[2]/mag_n
+            nx[i][j] = -n[0]/mag_n 
+            ny[i][j] = -n[1]/mag_n
+            nz[i][j] = -n[2]/mag_n
     
     # Collocation Points (C)
     cx = np.zeros((Na-1,Np-1))
@@ -159,5 +159,11 @@ def Panel_Wing(Na,Np,x,y,z):
             d3[i][j] = math.sqrt((x4[i][j]-x3[i][j])**2+(y4[i][j]-y3[i][j])**2)
             d4[i][j] = math.sqrt((x1[i][j]-x4[i][j])**2+(y1[i][j]-y4[i][j])**2)
 
-    # Return Values
-    return S,nx,ny,nz
+    # # Plot (Check Normal Vector)
+    # fig = plt.figure(2)
+    # ax = fig.gca(projection='3d')
+    # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
+    # plt.show()
+
+    # Return Values 
+    return d1,d2,d3,d4,x1,x2,x3,x4,y1,y2,y3,y4,S
