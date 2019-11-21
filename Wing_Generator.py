@@ -159,10 +159,12 @@ def Panel_Wing(Na,Np,x,y,z):
             d3[i][j] = math.sqrt((x4[i][j]-x3[i][j])**2+(y4[i][j]-y3[i][j])**2)
             d4[i][j] = math.sqrt((x1[i][j]-x4[i][j])**2+(y1[i][j]-y4[i][j])**2)
 
-    # # Plot (Check Normal Vector)
+    # Plot (Check Vector)
     # fig = plt.figure(2)
     # ax = fig.gca(projection='3d')
     # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
+    # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
+    # ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
     # plt.show()
     
     # Resize Panel Parameter

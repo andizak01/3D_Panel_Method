@@ -21,8 +21,8 @@ Na = 51     # Number of Airfoil Points (Odd) (1==Na)
 
 # Wing Parameter
 b = 2.0         # Wing Span
-Lambda = 0.8    # Taper Ratio
-theta = 10.0    # Sweep Angle in Degree
+Lambda = 1.0    # Taper Ratio
+theta = 0.0    # Sweep Angle in Degree
 cr = 1.0        # Chord Root
 Np = 11         # Number of Airfoil Section (Odd)
 
@@ -36,3 +36,4 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
 x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
 
+plt.show()
