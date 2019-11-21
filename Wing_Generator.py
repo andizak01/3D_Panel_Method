@@ -167,41 +167,42 @@ def Panel_Wing(Na,Np,x,y,z):
     
     # Resize Panel Parameter
     numpanel = (Na-1)*(Np-1)
-    np.resize(x1,(1,numpanel))
-    np.resize(x2,(1,numpanel))
-    np.resize(x3,(1,numpanel))
-    np.resize(x4,(1,numpanel))
-    np.resize(y1,(1,numpanel))
-    np.resize(y2,(1,numpanel))
-    np.resize(y3,(1,numpanel))
-    np.resize(y4,(1,numpanel))
+    x1 = np.reshape(x1,(1,numpanel))
+    x2 = np.reshape(x2,(1,numpanel))
+    x3 = np.reshape(x3,(1,numpanel))
+    x4 = np.reshape(x4,(1,numpanel))
+    y1 = np.reshape(y1,(1,numpanel))
+    y2 = np.reshape(y2,(1,numpanel))
+    y3 = np.reshape(y3,(1,numpanel))
+    y4 = np.reshape(y4,(1,numpanel))
 
-    np.resize(nx,(1,numpanel))
-    np.resize(ny,(1,numpanel))
-    np.resize(nz,(1,numpanel))
+    nx = np.reshape(nx,(1,numpanel))
+    ny = np.reshape(ny,(1,numpanel))
+    nz = np.reshape(nz,(1,numpanel))
 
-    np.resize(cx,(1,numpanel))
-    np.resize(cy,(1,numpanel))
-    np.resize(cz,(1,numpanel))
+    cx = np.reshape(cx,(1,numpanel))
+    cy = np.reshape(cy,(1,numpanel))
+    cz = np.reshape(cz,(1,numpanel))
     
-    np.resize(ux,(1,numpanel))
-    np.resize(uy,(1,numpanel))
-    np.resize(uz,(1,numpanel))
+    ux = np.reshape(ux,(1,numpanel))
+    uy = np.reshape(uy,(1,numpanel))
+    uz = np.reshape(uz,(1,numpanel))
 
-    np.resize(ox,(1,numpanel))
-    np.resize(oy,(1,numpanel))
-    np.resize(oz,(1,numpanel))
+    ox = np.reshape(ox,(1,numpanel))
+    oy = np.reshape(oy,(1,numpanel))
+    oz = np.reshape(oz,(1,numpanel))
 
-    np.resize(S,(1,numpanel))
+    S = np.reshape(S,(1,numpanel))
+   
     # Local Coordinate    
-    X = np.zeros(numpanel,numpanel)
-    Y = np.zeros(numpanel,numpanel)
-    Z = np.zeros(numpanel,numpanel)
+    X = np.zeros((numpanel,numpanel))
+    Y = np.zeros((numpanel,numpanel))
+    Z = np.zeros((numpanel,numpanel))
     for i in range(numpanel) :
         for j in range(numpanel) :
-            X[i,j] = (cx[j]-cx[i])*ux[i]+(cy[j]-cy[i])*uy[i]+(cz[j]-cz[i])*uz[i]
-            Y[i,j] = (cx[j]-cx[i])*ox[i]+(cy[j]-cy[i])*oy[i]+(cz[j]-cz[i])*oz[i]
-            Z[i,j] = (cx[j]-cx[i])*nx[i]+(cy[j]-cy[i])*ny[i]+(cz[j]-cz[i])*nz[i]
+            X[i][j] = (cx[0][j]-cx[0][i])*ux[0][i]+(cy[0][j]-cy[0][i])*uy[0][i]+(cz[0][j]-cz[0][i])*uz[0][i]
+            Y[i][j] = (cx[0][j]-cx[0][i])*ox[0][i]+(cy[0][j]-cy[0][i])*oy[0][i]+(cz[0][j]-cz[0][i])*oz[0][i]
+            Z[i][j] = (cx[0][j]-cx[0][i])*nx[0][i]+(cy[0][j]-cy[0][i])*ny[0][i]+(cz[0][j]-cz[0][i])*nz[0][i]
 
     # Return Values 
     return x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z
