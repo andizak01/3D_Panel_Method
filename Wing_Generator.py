@@ -199,9 +199,9 @@ def Panel_Wing(Na,Np,x,y,z):
     Z = np.zeros(numpanel,numpanel)
     for i in range(numpanel) :
         for j in range(numpanel) :
-            X[i,j] = (x[j]-cx[i])*ux[i]+(y[j]-cy[i])*uy[i]+(z[j]-cz[i])*uz[i]
-            Y[i,j] = (x[j]-cx[i])*ox[i]+(y[j]-cy[i])*oy[i]+(z[j]-cz[i])*oz[i]
-            Z[i,j] = (x[j]-cx[i])*nx[i]+(y[j]-cy[i])*ny[i]+(z[j]-cz[i])*nz[i]
+            X[i,j] = (cx[j]-cx[i])*ux[i]+(cy[j]-cy[i])*uy[i]+(cz[j]-cz[i])*uz[i]
+            Y[i,j] = (cx[j]-cx[i])*ox[i]+(cy[j]-cy[i])*oy[i]+(cz[j]-cz[i])*oz[i]
+            Z[i,j] = (cx[j]-cx[i])*nx[i]+(cy[j]-cy[i])*ny[i]+(cz[j]-cz[i])*nz[i]
 
     # Return Values 
     return x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z
