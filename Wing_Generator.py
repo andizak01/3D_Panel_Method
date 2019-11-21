@@ -164,6 +164,44 @@ def Panel_Wing(Na,Np,x,y,z):
     # ax = fig.gca(projection='3d')
     # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
     # plt.show()
+    
+    # Resize Panel Parameter
+    numpanel = (Na-1)*(Np-1)
+    np.resize(x1,(1,numpanel))
+    np.resize(x2,(1,numpanel))
+    np.resize(x3,(1,numpanel))
+    np.resize(x4,(1,numpanel))
+    np.resize(y1,(1,numpanel))
+    np.resize(y2,(1,numpanel))
+    np.resize(y3,(1,numpanel))
+    np.resize(y4,(1,numpanel))
+
+    np.resize(nx,(1,numpanel))
+    np.resize(ny,(1,numpanel))
+    np.resize(nz,(1,numpanel))
+
+    np.resize(cx,(1,numpanel))
+    np.resize(cy,(1,numpanel))
+    np.resize(cz,(1,numpanel))
+    
+    np.resize(ux,(1,numpanel))
+    np.resize(uy,(1,numpanel))
+    np.resize(uz,(1,numpanel))
+
+    np.resize(ox,(1,numpanel))
+    np.resize(oy,(1,numpanel))
+    np.resize(oz,(1,numpanel))
+
+    np.resize(S,(1,numpanel))
+    # Local Coordinate    
+    X = np.zeros(numpanel,numpanel)
+    Y = np.zeros(numpanel,numpanel)
+    Z = np.zeros(numpanel,numpanel)
+    for i in range(numpanel) :
+        for j in range(numpanel) :
+            X[i,j] = (x[j]-cx[i])*ux[i]+(y[j]-cy[i])*uy[i]+(z[j]-cz[i])*uz[i]
+            Y[i,j] = (x[j]-cx[i])*ox[i]+(y[j]-cy[i])*oy[i]+(z[j]-cz[i])*oz[i]
+            Z[i,j] = (x[j]-cx[i])*nx[i]+(y[j]-cy[i])*ny[i]+(z[j]-cz[i])*nz[i]
 
     # Return Values 
-    return d1,d2,d3,d4,x1,x2,x3,x4,y1,y2,y3,y4,S
+    return x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z
