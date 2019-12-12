@@ -207,4 +207,4 @@ def Panel_Wing(Na,Np,x,y,z):
             Z[i][j] = (cx[0][j]-cx[0][i])*nx[0][i]+(cy[0][j]-cy[0][i])*ny[0][i]+(cz[0][j]-cz[0][i])*nz[0][i]
 
     # Return Values 
-    return x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z
+    return x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z
