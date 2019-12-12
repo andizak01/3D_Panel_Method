@@ -65,6 +65,10 @@ class Panel:
         self.sigma = 0
         self.myu = 0
 
+        # only useful for wake
+        self.ind_upper = 99999
+        self.ind_lower = 199999
+
 def calculate_sigma(panels, freestream):
     """
     Calculate the source strength for each panel in panels.

@@ -12,7 +12,6 @@ from funclass import Freestream, Panel, calculate_sigma, influence_coeff, wake_i
 mu = 1.0    # Kinematic Viscosity
 U_inf = 1.0 # Freestream Velocity
 alpha = 5.0 # AoA in Degree
-
 alpha = alpha*math.pi/180.0 # Convert AoA to radian
 
 # Airfoil Parameter (NACA 4-digit)
@@ -37,23 +36,42 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 # 2. Create Wing and Panel
 xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
 x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
-print(x1.size)
+# Perlu ini untuk wake
+# x1_wake,x2_wake,x3,x4,y1,y2,y3,y4,S,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw)
+# ind_upper : vector (ukuran N_wake) isinya index panel upper yg bersentuhan dg wake ke-i
+# ind_lower : vector (ukuran N_wake) isinya index panel lower yg bersentuhan dg wake ke-i
 
-# 3. Compute compute
+# 3. Panel Objects, Influence Coefficients, Singularities Strength 
+# 3.1 Wing Panels
+# Number of panels for wing
 N_panel = x1.size
 panels = numpy.empty(N_panel, dtype=object)
-print(x1.size)
 
+# Create 'objects' of wing panels
 for i in range(N_panel):
    panels[i] = Panel(x1[i], x2[i], x3[i], x4[i], y1[i], y2[i], y3[i], y4[i], S[i], nx[i], ny[i], nz[i])
 
+# Computing Influence Coefficient of WING Panels
+A, B = influence_coeff(panels, X, Y, Z)
+
+# 3.2 Create wake panels
+# Number of panels for wake
+N_wake_panel = x1_wake.size #number of panels in the spanwise direction
+wake_panels = numpy.empty(N_wake_panel, dtype=object)
+
+# Create 'objects' of wake panels
+for i in range(N_wake_panel):
+   wake_panels[i] = Panel(x1_wake[i], x2_wake[i], x3_wake[i], x4_wake[i], y1_wake[i], y2_wake[i], y3_wake[i], y4_wake[i], S_wake[i], 0, 0, 1)
+   wake_panels[i].ind_upper = ind_upper[i]
+   wake_panels[i].ind_lower = ind_lower[i]
+
+# Computing Influence Coefficient of WAKE Panels
+Aw = wake_influence_coeff(wake_panels, X_wake, Y_wake, Z_wake, panels.size)
+
+# 3.3 Construct the RHS and LHS
 freestream = Freestream(U_inf,alpha)
 
 calculate_sigma(panels, freestream)
-
-# Computing Influence Coefficient
-A, B = influence_coeff(panels, X, Y, Z)
-Aw = wake_influence_coeff(panels, X, Y, Z, panels.size)
 
 # Compute the Right Hand Side
 RHS = numpy.dot(-B, [panel.sigma for panel in panels])
@@ -61,9 +79,9 @@ RHS = numpy.dot(-B, [panel.sigma for panel in panels])
 # Compute the Left Hand Side Atot
 Atot = A + Aw
 
-# Solve for DOUBLET strengths
+# 3.4 Solve for DOUBLET strengths
 myus = numpy.linalg.solve(Atot, RHS)
 
-# Store source strength on each panel
+# 3.5 Store source strength on each panel
 for i, panel in enumerate(panels):
    panels[i].myu = myus[i]
