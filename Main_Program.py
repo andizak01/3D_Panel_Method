@@ -1,10 +1,12 @@
 from mpl_toolkits import mplot3d
-import numpy as np 
+import numpy 
 import math
 import matplotlib.pyplot as plt
 
 import Airfoil_Generator
 import Wing_Generator
+
+from funclass import Freestream, Panel, calculate_sigma, influence_coeff, wake_influence_coeff
 
 # Global Input Parameter
 mu = 1.0    # Kinematic Viscosity
@@ -35,3 +37,33 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 # 2. Create Wing and Panel
 xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
 x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
+print(x1.size)
+
+# 3. Compute compute
+N_panel = x1.size
+panels = numpy.empty(N_panel, dtype=object)
+print(x1.size)
+
+for i in range(N_panel):
+   panels[i] = Panel(x1[i], x2[i], x3[i], x4[i], y1[i], y2[i], y3[i], y4[i], S[i], nx[i], ny[i], nz[i])
+
+freestream = Freestream(U_inf,alpha)
+
+calculate_sigma(panels, freestream)
+
+# Computing Influence Coefficient
+A, B = influence_coeff(panels, X, Y, Z)
+Aw = wake_influence_coeff(panels, X, Y, Z, panels.size)
+
+# Compute the Right Hand Side
+RHS = numpy.dot(-B, [panel.sigma for panel in panels])
+
+# Compute the Left Hand Side Atot
+Atot = A + Aw
+
+# Solve for DOUBLET strengths
+myus = numpy.linalg.solve(Atot, RHS)
+
+# Store source strength on each panel
+for i, panel in enumerate(panels):
+   panels[i].myu = myus[i]

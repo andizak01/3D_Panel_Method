@@ -194,7 +194,7 @@ def Panel_Wing(Na,Np,x,y,z):
     oy = np.reshape(oy,(-1))
     oz = np.reshape(oz,(-1))
 
-    S = np.reshape(S,(1,numpanel))
+    S = np.reshape(S,(-1))
    
     # Local Coordinate    
     X = np.zeros((numpanel,numpanel))
