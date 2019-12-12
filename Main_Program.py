@@ -34,4 +34,4 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 
 # 2. Create Wing and Panel
 xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
-x1,x2,x3,x4,y1,y2,y3,y4,S,n,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
+x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
