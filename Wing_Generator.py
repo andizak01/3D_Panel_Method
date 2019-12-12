@@ -211,3 +211,4 @@ def Panel_Wing(Na,Np,x,y,z):
 
     # Return Values 
     return x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z
+
