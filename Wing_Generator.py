@@ -219,14 +219,14 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
             x1[i][j] = (x[i][j]-cx[i][j])*ux[i][j]+(y[i][j]-cy[i][j])*uy[i][j]+(z[i][j]-cz[i][j])*uz[i][j]
             y1[i][j] = (x[i][j]-cx[i][j])*ox[i][j]+(y[i][j]-cy[i][j])*oy[i][j]+(z[i][j]-cz[i][j])*oz[i][j]
             
-            x2[i][j] = (x[i+1][j]-cx[i][j])*ux[i][j]+(y[i+1][j]-cy[i][j])*uy[i][j]+(z[i+1][j]-cz[i][j])*uz[i][j]
-            y2[i][j] = (x[i+1][j]-cx[i][j])*ox[i][j]+(y[i+1][j]-cy[i][j])*oy[i][j]+(z[i+1][j]-cz[i][j])*oz[i][j]
+            x4[i][j] = (x[i+1][j]-cx[i][j])*ux[i][j]+(y[i+1][j]-cy[i][j])*uy[i][j]+(z[i+1][j]-cz[i][j])*uz[i][j]
+            y4[i][j] = (x[i+1][j]-cx[i][j])*ox[i][j]+(y[i+1][j]-cy[i][j])*oy[i][j]+(z[i+1][j]-cz[i][j])*oz[i][j]
             
             x3[i][j] = (x[i+1][j+1]-cx[i][j])*ux[i][j]+(y[i+1][j+1]-cy[i][j])*uy[i][j]+(z[i+1][j+1]-cz[i][j])*uz[i][j]
             y3[i][j] = (x[i+1][j+1]-cx[i][j])*ox[i][j]+(y[i+1][j+1]-cy[i][j])*oy[i][j]+(z[i+1][j+1]-cz[i][j])*oz[i][j]
             
-            x4[i][j] = (x[i][j+1]-cx[i][j])*ux[i][j]+(y[i][j+1]-cy[i][j])*uy[i][j]+(z[i][j+1]-cz[i][j])*uz[i][j]
-            y4[i][j] = (x[i][j+1]-cx[i][j])*ox[i][j]+(y[i][j+1]-cy[i][j])*oy[i][j]+(z[i][j+1]-cz[i][j])*oz[i][j]
+            x2[i][j] = (x[i][j+1]-cx[i][j])*ux[i][j]+(y[i][j+1]-cy[i][j])*uy[i][j]+(z[i][j+1]-cz[i][j])*uz[i][j]
+            y2[i][j] = (x[i][j+1]-cx[i][j])*ox[i][j]+(y[i][j+1]-cy[i][j])*oy[i][j]+(z[i][j+1]-cz[i][j])*oz[i][j]
 
             d1[i][j] = math.sqrt((x2[i][j]-x1[i][j])**2+(y2[i][j]-y1[i][j])**2)
             d2[i][j] = math.sqrt((x3[i][j]-x2[i][j])**2+(y3[i][j]-y2[i][j])**2)
@@ -253,14 +253,14 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
         x1w[i] = (xwake[i]-cxwake[i])*uxwake[i]+(ywake[i]-cywake[i])*uywake[i]+(zwake[i]-czwake[i])*uzwake[i]
         y1w[i] = (xwake[i]-cxwake[i])*oxwake[i]+(ywake[i]-cywake[i])*oywake[i]+(zwake[i]-czwake[i])*ozwake[i]
             
-        x2w[i] = (x[0][i]-cxwake[i])*uxwake[i]+(y[0][i]-cywake[i])*uywake[i]+(z[0][i]-czwake[i])*uzwake[i]
-        y2w[i] = (x[0][i]-cxwake[i])*oxwake[i]+(y[0][i]-cywake[i])*oywake[i]+(z[0][i]-czwake[i])*ozwake[i]
+        x4w[i] = (x[0][i]-cxwake[i])*uxwake[i]+(y[0][i]-cywake[i])*uywake[i]+(z[0][i]-czwake[i])*uzwake[i]
+        y4w[i] = (x[0][i]-cxwake[i])*oxwake[i]+(y[0][i]-cywake[i])*oywake[i]+(z[0][i]-czwake[i])*ozwake[i]
 
         x3w[i] = (x[0][i+1]-cxwake[i])*uxwake[i]+(y[0][i+1]-cywake[i])*uywake[i]+(z[0][i+1]-czwake[i])*uzwake[i]
         y3w[i] = (x[0][i+1]-cxwake[i])*oxwake[i]+(y[0][i+1]-cywake[i])*oywake[i]+(z[0][i+1]-czwake[i])*ozwake[i]
 
-        x4w[i] = (xwake[i+1]-cxwake[i])*uxwake[i]+(ywake[i+1]-cywake[i])*uywake[i]+(zwake[i+1]-czwake[i])*uzwake[i]
-        y4w[i] = (xwake[i+1]-cxwake[i])*oxwake[i]+(ywake[i+1]-cywake[i])*oywake[i]+(zwake[i+1]-czwake[i])*ozwake[i]
+        x2w[i] = (xwake[i+1]-cxwake[i])*uxwake[i]+(ywake[i+1]-cywake[i])*uywake[i]+(zwake[i+1]-czwake[i])*uzwake[i]
+        y2w[i] = (xwake[i+1]-cxwake[i])*oxwake[i]+(ywake[i+1]-cywake[i])*oywake[i]+(zwake[i+1]-czwake[i])*ozwake[i]
 
         d1w[i] = math.sqrt((x2w[i]-x1w[i])**2+(y2w[i]-y1w[i])**2)
         d2w[i] = math.sqrt((x3w[i]-x2w[i])**2+(y3w[i]-y2w[i])**2)
