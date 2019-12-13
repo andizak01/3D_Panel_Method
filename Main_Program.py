@@ -34,8 +34,9 @@ theta = theta*math.pi/180.0 # Convert Sweep Angle to radian
 xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil Coordinate (x/c,y/c)
 
 # 2. Create Wing and Panel
-xw,yw,zw = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
-x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw) 
+xw,yw,zw,xwake,ywake,zwake = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
+x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wake,y2_wake,y3_wake,y4_wake,S_wake,X_wake,Y_wake,Z_wake = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw,xwake,ywake,zwake) 
+
 # Perlu ini untuk wake
 # x1_wake,x2_wake,x3,x4,y1,y2,y3,y4,S,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw)
 # ind_upper : vector (ukuran N_wake) isinya index panel upper yg bersentuhan dg wake ke-i
@@ -46,6 +47,8 @@ x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw
 # Number of panels for wing
 N_panel = x1.size
 panels = numpy.empty(N_panel, dtype=object)
+ind_lower = range(Np)
+ind_upper = range(N_panel-Np-2,N_panel)
 
 # Create 'objects' of wing panels
 for i in range(N_panel):
