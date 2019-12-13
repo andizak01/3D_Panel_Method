@@ -196,8 +196,8 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
         pzwake[i] = p[2]/mag_p
         # vector o (n x u)
         oxwake[i] = nywake[i]*uzwake[i] - nzwake[i]*uywake[i]
-        oywake[i] = -nxwake[i][j]*uzwake[i] + nzwake[i]*uxwake[i] 
-        ozwake[i] = nxwake[i][j]*uywake[i] - nywake[i]*uzwake[i]
+        oywake[i] = -nxwake[i]*uzwake[i] + nzwake[i]*uxwake[i] 
+        ozwake[i] = nxwake[i]*uywake[i] - nywake[i]*uzwake[i]
 
     # Local Panel Coordinate and Panel Side Length
     # Local Panel Coordinate (x,y)
@@ -270,8 +270,8 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
     # Plot (Check Vector)
     # fig = plt.figure(2)
     # ax = fig.gca(projection='3d')
-    # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
-    # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
+    # # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
+    # # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
     # ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
     # plt.show()
     
