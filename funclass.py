@@ -155,7 +155,7 @@ def influence_coeff(panels, X, Y, Z):
         #for j, panel_j in enumerate(panels):    
             if j != i:                                          # not the same panel
                 if r[j] >= ( 5 * numpy.sqrt(panel_i.S) ):       # far-field
-                    A[j,i] = -panel_i.S / Z[i,j] * r[j]**(-3/2)
+                    A[j,i] = -panel_i.S * Z[i,j] * r[j]**(-3)
                     B[j,i] = -panel_i.S / r[j]
                 else:
                     A[j,i] = ( numpy.arctan2(m12*e1[j] - h1[j], Z[i,j]*r1[j])

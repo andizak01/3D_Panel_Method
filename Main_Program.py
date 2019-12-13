@@ -49,12 +49,12 @@ panels = numpy.empty(N_panel, dtype=object)
 
 # Create 'objects' of wing panels
 for i in range(N_panel):
-   panels[i] = Panel(x1[i], x2[i], x3[i], x4[i], y1[i], y2[i], y3[i], y4[i], S[i], nx[i], ny[i], nz[i])
+   panels[i] = Panel(x2[i], x3[i], x4[i], x1[i], y2[i], y3[i], y4[i], y1[i], S[i], nx[i], ny[i], nz[i])
 
 # Computing Influence Coefficient of WING Panels
 A, B = influence_coeff(panels, X, Y, Z)
 
-# 3.2 Create wake panels
+"""# 3.2 Create wake panels
 # Number of panels for wake
 N_wake_panel = x1_wake.size #number of panels in the spanwise direction
 wake_panels = numpy.empty(N_wake_panel, dtype=object)
@@ -84,4 +84,4 @@ myus = numpy.linalg.solve(Atot, RHS)
 
 # 3.5 Store source strength on each panel
 for i, panel in enumerate(panels):
-   panels[i].myu = myus[i]
+   panels[i].myu = myus[i]"""
