@@ -47,12 +47,10 @@ x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wak
 # Number of panels for wing
 N_panel = x1.size
 panels = numpy.empty(N_panel, dtype=object)
-ind_lower = range(Np)
-ind_upper = range(N_panel-Np-2,N_panel)
 
 # Create 'objects' of wing panels
 for i in range(N_panel):
-   panels[i] = Panel(x2[i], x3[i], x4[i], x1[i], y2[i], y3[i], y4[i], y1[i], S[i], nx[i], ny[i], nz[i])
+   panels[i] = Panel(x1[i], x4[i], x3[i], x2[i], y1[i], y4[i], y3[i], y2[i], S[i], nx[i], ny[i], nz[i])
 
 # Computing Influence Coefficient of WING Panels
 A, B = influence_coeff(panels, X, Y, Z)
@@ -63,6 +61,8 @@ N_wake_panel = x1_wake.size #number of panels in the spanwise direction
 wake_panels = numpy.empty(N_wake_panel, dtype=object)
 
 # Create 'objects' of wake panels
+ind_lower = range(Np)
+ind_upper = range(N_panel-Np-2,N_panel)
 for i in range(N_wake_panel):
    wake_panels[i] = Panel(x1_wake[i], x2_wake[i], x3_wake[i], x4_wake[i], y1_wake[i], y2_wake[i], y3_wake[i], y4_wake[i], S_wake[i], 0, 0, 1)
    wake_panels[i].ind_upper = ind_upper[i]
