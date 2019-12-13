@@ -15,8 +15,8 @@ alpha = 5.0 # AoA in Degree
 alpha = alpha*math.pi/180.0 # Convert AoA to radian
 
 # Airfoil Parameter (NACA 4-digit)
-m = 2/100   # Maximum Camber
-p = 40/100  # Location of Maximum Camber
+m = 0/100   # Maximum Camber
+p = 0/100  # Location of Maximum Camber
 t = 12/100  # Maximum Thickness
 Na = 51     # Number of Airfoil Points (Odd) (1==Na)
 
@@ -35,12 +35,7 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 
 # 2. Create Wing and Panel
 xw,yw,zw,xwake,ywake,zwake = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
-x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wake,y2_wake,y3_wake,y4_wake,S_wake,X_wake,Y_wake,Z_wake = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw,xwake,ywake,zwake) 
-
-# Perlu ini untuk wake
-# x1_wake,x2_wake,x3,x4,y1,y2,y3,y4,S,X,Y,Z = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw)
-# ind_upper : vector (ukuran N_wake) isinya index panel upper yg bersentuhan dg wake ke-i
-# ind_lower : vector (ukuran N_wake) isinya index panel lower yg bersentuhan dg wake ke-i
+cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wake,y2_wake,y3_wake,y4_wake,S_wake,X_wake,Y_wake,Z_wake = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw,xwake,ywake,zwake) 
 
 # 3. Panel Objects, Influence Coefficients, Singularities Strength 
 # 3.1 Wing Panels
@@ -50,12 +45,12 @@ panels = numpy.empty(N_panel, dtype=object)
 
 # Create 'objects' of wing panels
 for i in range(N_panel):
-   panels[i] = Panel(x1[i], x4[i], x3[i], x2[i], y1[i], y4[i], y3[i], y2[i], S[i], nx[i], ny[i], nz[i])
+   panels[i] = Panel(x1[i], x2[i], x3[i], x4[i], y1[i], y2[i], y3[i], y4[i], S[i], nx[i], ny[i], nz[i])
 
 # Computing Influence Coefficient of WING Panels
 A, B = influence_coeff(panels, X, Y, Z)
 
-"""# 3.2 Create wake panels
+# 3.2 Create wake panels
 # Number of panels for wake
 N_wake_panel = x1_wake.size #number of panels in the spanwise direction
 wake_panels = numpy.empty(N_wake_panel, dtype=object)
@@ -85,6 +80,21 @@ Atot = A + Aw
 # 3.4 Solve for DOUBLET strengths
 myus = numpy.linalg.solve(Atot, RHS)
 
-# 3.5 Store source strength on each panel
+# 3.5 Store doublet strength on each panel
 for i, panel in enumerate(panels):
-   panels[i].myu = myus[i]"""
+   panels[i].myu = myus[i]
+
+# COBACOBA PLOT
+cx_mat = numpy.reshape(cx,(Na-1,Np-1))
+cy_mat = numpy.reshape(cy,(Na-1,Np-1))
+cz_mat = numpy.reshape(cz,(Na-1,Np-1)) 
+panels_mat = numpy.reshape(panels,(Na-1,Np-1))
+
+Np12 = int((Np-1)/2)
+print(cx_mat[:,Np12])
+
+plt.figure(20)
+plt.plot(cx_mat[:,Np12],[panel.myu for panel in panels_mat[:,Np12]] )
+plt.show()
+
+print([panel.myu for panel in panels_mat[:,Np12]])
