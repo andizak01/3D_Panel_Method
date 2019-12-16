@@ -45,8 +45,8 @@ def Geo_Wing(xa,ya,Np,b,cr,ct,theta):
         c =  (i*bl*cr+(b2-i*bl)*ct)/b2  # Airfoil Chord
 
         xwake[i] = xw[0][i] + 50.0*c
-        ywake[i] = yw[0][i] + 50.0*c
-        zwake[i] = zw[0][i] + 50.0*c
+        ywake[i] = yw[0][i]
+        zwake[i] = zw[0][i]
 
     # Plot
     fig = plt.figure(1)
