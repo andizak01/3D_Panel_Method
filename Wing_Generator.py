@@ -250,17 +250,17 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
     d4w = np.zeros(Np-1)
     for i in range(Np-1) :
         
-        x1w[i] = (xwake[i]-cxwake[i])*uxwake[i]+(ywake[i]-cywake[i])*uywake[i]+(zwake[i]-czwake[i])*uzwake[i]
-        y1w[i] = (xwake[i]-cxwake[i])*oxwake[i]+(ywake[i]-cywake[i])*oywake[i]+(zwake[i]-czwake[i])*ozwake[i]
+        x4w[i] = (xwake[i]-cxwake[i])*uxwake[i]+(ywake[i]-cywake[i])*uywake[i]+(zwake[i]-czwake[i])*uzwake[i]
+        y4w[i] = (xwake[i]-cxwake[i])*oxwake[i]+(ywake[i]-cywake[i])*oywake[i]+(zwake[i]-czwake[i])*ozwake[i]
             
-        x4w[i] = (x[0][i]-cxwake[i])*uxwake[i]+(y[0][i]-cywake[i])*uywake[i]+(z[0][i]-czwake[i])*uzwake[i]
-        y4w[i] = (x[0][i]-cxwake[i])*oxwake[i]+(y[0][i]-cywake[i])*oywake[i]+(z[0][i]-czwake[i])*ozwake[i]
+        x1w[i] = (x[0][i]-cxwake[i])*uxwake[i]+(y[0][i]-cywake[i])*uywake[i]+(z[0][i]-czwake[i])*uzwake[i]
+        y1w[i] = (x[0][i]-cxwake[i])*oxwake[i]+(y[0][i]-cywake[i])*oywake[i]+(z[0][i]-czwake[i])*ozwake[i]
 
-        x3w[i] = (x[0][i+1]-cxwake[i])*uxwake[i]+(y[0][i+1]-cywake[i])*uywake[i]+(z[0][i+1]-czwake[i])*uzwake[i]
-        y3w[i] = (x[0][i+1]-cxwake[i])*oxwake[i]+(y[0][i+1]-cywake[i])*oywake[i]+(z[0][i+1]-czwake[i])*ozwake[i]
+        x2w[i] = (x[0][i+1]-cxwake[i])*uxwake[i]+(y[0][i+1]-cywake[i])*uywake[i]+(z[0][i+1]-czwake[i])*uzwake[i]
+        y2w[i] = (x[0][i+1]-cxwake[i])*oxwake[i]+(y[0][i+1]-cywake[i])*oywake[i]+(z[0][i+1]-czwake[i])*ozwake[i]
 
-        x2w[i] = (xwake[i+1]-cxwake[i])*uxwake[i]+(ywake[i+1]-cywake[i])*uywake[i]+(zwake[i+1]-czwake[i])*uzwake[i]
-        y2w[i] = (xwake[i+1]-cxwake[i])*oxwake[i]+(ywake[i+1]-cywake[i])*oywake[i]+(zwake[i+1]-czwake[i])*ozwake[i]
+        x3w[i] = (xwake[i+1]-cxwake[i])*uxwake[i]+(ywake[i+1]-cywake[i])*uywake[i]+(zwake[i+1]-czwake[i])*uzwake[i]
+        y3w[i] = (xwake[i+1]-cxwake[i])*oxwake[i]+(ywake[i+1]-cywake[i])*oywake[i]+(zwake[i+1]-czwake[i])*ozwake[i]
 
         d1w[i] = math.sqrt((x2w[i]-x1w[i])**2+(y2w[i]-y1w[i])**2)
         d2w[i] = math.sqrt((x3w[i]-x2w[i])**2+(y3w[i]-y2w[i])**2)
@@ -328,7 +328,6 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
             Ywake[i][j] = (cx[j]-cxwake[i])*oxwake[i]+(cy[j]-cywake[i])*oywake[i]+(cz[j]-czwake[i])*ozwake[i]
             Zwake[i][j] = (cx[j]-cxwake[i])*nxwake[i]+(cy[j]-cywake[i])*nywake[i]+(cz[j]-czwake[i])*nzwake[i]
     
-
     # Return Values 
     return cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z,x1w,x2w,x3w,x4w,y1w,y2w,y3w,y4w,Swake,Xwake,Ywake,Zwake
 
