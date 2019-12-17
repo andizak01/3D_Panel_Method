@@ -94,16 +94,16 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
     nzwake = np.zeros(Np-1)
     for i in range(Np-1) :
         # Diagonal Vector
-        A = [(x[0][i+1]-xwake[i]), (y[0][i+1]-ywake[i]), (z[0][i+1]-zwake[i])]
-        B = [(x[0][i]-xwake[i+1]), (y[0][i]-ywake[i+1]), (z[0][i]-zwake[i+1])]
+        A1 = [(x[0][i+1]-xwake[i]), (y[0][i+1]-ywake[i]), (z[0][i+1]-zwake[i])]
+        B1 = [(x[0][i]-xwake[i+1]), (y[0][i]-ywake[i+1]), (z[0][i]-zwake[i+1])]
         # Panel Surface Area
-        n = np.cross(A,B)
-        mag_n = np.linalg.norm(n)
-        Swake[i] = mag_n/2
+        n1 = np.cross(A1,B1)
+        mag_n1 = np.linalg.norm(n1)
+        Swake[i] = mag_n1/2
         # Normal Vector
-        nxwake[i] = -n[0]/mag_n 
-        nywake[i] = -n[1]/mag_n
-        nzwake[i] = -n[2]/mag_n
+        nxwake[i] = n1[0]/mag_n1 
+        nywake[i] = n1[1]/mag_n1
+        nzwake[i] = n1[2]/mag_n1
     
     # Collocation Points (C)
     cx = np.zeros((Na-1,Np-1))
@@ -182,9 +182,9 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
         u[1] = (y[0][i] + y[0][i+1] - ywake[i] - ywake[i+1])/2
         u[2] = (z[0][i] + z[0][i+1] - zwake[i] - zwake[i+1])/2
         mag_u = np.linalg.norm(u)
-        uxwake[i] = u[0]/mag_u
-        uywake[i] = u[1]/mag_u
-        uzwake[i] = u[2]/mag_u
+        uxwake[i] = -u[0]/mag_u
+        uywake[i] = -u[1]/mag_u
+        uzwake[i] = -u[2]/mag_u
         # Vector p
         p = np.zeros(3)
         p[0] = (xwake[i+1] + x[0][i+1] - x[0][i] - xwake[i])/2
@@ -267,13 +267,13 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
         d3w[i] = math.sqrt((x4w[i]-x3w[i])**2+(y4w[i]-y3w[i])**2)
         d4w[i] = math.sqrt((x1w[i]-x4w[i])**2+(y1w[i]-y4w[i])**2)
     
-    # Plot (Check Vector)
-    fig = plt.figure(2)
-    ax = fig.gca(projection='3d')
+    # # Plot (Check Vector)
+    # fig = plt.figure(2)
+    # ax = fig.gca(projection='3d')
     # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
     # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
-    ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
-    plt.show()
+    # ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
+    # plt.show()
     
     # Resize Panel Parameter
     numpanel = (Na-1)*(Np-1)
@@ -327,6 +327,7 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
             Xwake[i][j] = (cx[j]-cxwake[i])*uxwake[i]+(cy[j]-cywake[i])*uywake[i]+(cz[j]-czwake[i])*uzwake[i]
             Ywake[i][j] = (cx[j]-cxwake[i])*oxwake[i]+(cy[j]-cywake[i])*oywake[i]+(cz[j]-czwake[i])*ozwake[i]
             Zwake[i][j] = (cx[j]-cxwake[i])*nxwake[i]+(cy[j]-cywake[i])*nywake[i]+(cz[j]-czwake[i])*nzwake[i]
+    
 
     # Return Values 
     return cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z,x1w,x2w,x3w,x4w,y1w,y2w,y3w,y4w,Swake,Xwake,Ywake,Zwake

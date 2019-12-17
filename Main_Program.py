@@ -91,10 +91,10 @@ cz_mat = numpy.reshape(cz,(Na-1,Np-1))
 panels_mat = numpy.reshape(panels,(Na-1,Np-1))
 
 Np12 = int((Np-1)/2)
-print(cx_mat[:,Np12])
+# print(cx_mat[:,Np12])
 
 plt.figure(20)
 plt.plot(cx_mat[:,Np12],[panel.myu for panel in panels_mat[:,Np12]] )
 plt.show()
 
-print([panel.myu for panel in panels_mat[:,Np12]])
+# print([panel.myu for panel in panels_mat[:,Np12]])
