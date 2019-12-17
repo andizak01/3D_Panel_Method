@@ -268,12 +268,12 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
         d4w[i] = math.sqrt((x1w[i]-x4w[i])**2+(y1w[i]-y4w[i])**2)
     
     # Plot (Check Vector)
-    # fig = plt.figure(2)
-    # ax = fig.gca(projection='3d')
-    # # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
-    # # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
-    # ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
-    # plt.show()
+    fig = plt.figure(2)
+    ax = fig.gca(projection='3d')
+    # ax.quiver(cx, cy, cz, nx, ny, nz, length=0.05, normalize=True)
+    # ax.quiver(cx, cy, cz, ux, uy, uz, length=0.05, normalize=True)
+    ax.quiver(cx, cy, cz, ox, oy, oz, length=0.05, normalize=True)
+    plt.show()
     
     # Resize Panel Parameter
     numpanel = (Na-1)*(Np-1)
