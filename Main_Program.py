@@ -2,6 +2,7 @@ from mpl_toolkits import mplot3d
 import numpy 
 import math
 import matplotlib.pyplot as plt
+from matplotlib import cm
 
 import Airfoil_Generator
 import Wing_Generator
@@ -101,3 +102,21 @@ plt.plot(cx_mat[:,Np12],[panel.sigma for panel in panels_mat[:,Np12]] )
 plt.show()
 
 # print([panel.myu for panel in panels_mat[:,Np12]])
+ql,qm,v,cp,CX,CY,CZ,ql,qo,gu,go = calculate_cp.output(N_panel,Np,cx,cy,cz,panels,ux,uy,uz,px,py,pz,ox,oy,oz,nx,ny,nz,U_inf,Vx,Vy,Vz,S,Sw,q,b,cr)
+# print([panel.myu for panel in panels_mat[:,Np12]])
+
+#Upper part
+fig = plt.figure()
+plt.contourf(cy_mat[0:25,:],cx_mat[0:25,:],cp[0:25,:],20,cmap=cm.jet)
+plt.title('Cp distribution upper wing')
+plt.xlabel('y')
+plt.ylabel('x')
+plt.colorbar()
+
+#Lower part
+fig = plt.figure()
+plt.contourf(cy_mat[25:50,:],cx_mat[25:50,:],cp[25:50,:],20,cmap=cm.jet)
+plt.title('Cp distribution lower wing')
+plt.xlabel('y')
+plt.ylabel('x')
+plt.colorbar()
