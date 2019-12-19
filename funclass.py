@@ -175,7 +175,7 @@ def influence_coeff(panels, X, Y, Z):
                              + ((X[i,j] - panel_i.x4)*y14 - (Y[i,j] - panel_i.y4)*x14) 
                                 / d41 * numpy.log( (r4[j]+r1[j]+d41)/(r4[j]+r1[j]-d41) ) 
                              - numpy.absolute(Z[i,j]) * A[j,i] )     
-        A[i,i] = 0.5
+        A[i,i] = 0.5 * (4*numpy.pi)
         B[i,i] = -(((X[i,i] - panel_i.x1)*y21 - (Y[i,i] - panel_i.y1)*x21) 
                     / d12 * numpy.log( (r1[i]+r2[i]+d12)/(r1[i]+r2[i]-d12) ) 
                  + ((X[i,i] - panel_i.x2)*y32 - (Y[i,i] - panel_i.y2)*x32) 

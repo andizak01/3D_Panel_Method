@@ -11,14 +11,14 @@ from funclass import Freestream, Panel, calculate_sigma, influence_coeff, wake_i
 # Global Input Parameter
 mu = 1.0    # Kinematic Viscosity
 U_inf = 1.0 # Freestream Velocity
-alpha = 5.0 # AoA in Degree
+alpha = 0.0 # AoA in Degree
 alpha = alpha*math.pi/180.0 # Convert AoA to radian
 
 # Airfoil Parameter (NACA 4-digit)
 m = 0/100   # Maximum Camber
 p = 0/100  # Location of Maximum Camber
 t = 12/100  # Maximum Thickness
-Na = 51     # Number of Airfoil Points (Odd) (1==Na)
+Na = 15     # Number of Airfoil Points (Odd) (1==Na)
 
 # Wing Parameter
 b = 2.0         # Wing Span
@@ -93,8 +93,11 @@ panels_mat = numpy.reshape(panels,(Na-1,Np-1))
 Np12 = int((Np-1)/2)
 # print(cx_mat[:,Np12])
 
-plt.figure(20)
+plt.figure(5)
 plt.plot(cx_mat[:,Np12],[panel.myu for panel in panels_mat[:,Np12]] )
+
+plt.figure(6)
+plt.plot(cx_mat[:,Np12],[panel.sigma for panel in panels_mat[:,Np12]] )
 plt.show()
 
 # print([panel.myu for panel in panels_mat[:,Np12]])
