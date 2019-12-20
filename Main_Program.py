@@ -6,7 +6,6 @@ from matplotlib import cm
 
 import Airfoil_Generator
 import Wing_Generator
-import calculate_cp
 
 from funclass import Freestream, Panel, calculate_sigma, influence_coeff, wake_influence_coeff
 
@@ -29,15 +28,14 @@ Vz = U_inf*numpy.cos(beta)*numpy.sin(alpha)
 m = 0/100   # Maximum Camber
 p = 0/100  # Location of Maximum Camber
 t = 12/100  # Maximum Thickness
-Na = 21     # Number of Airfoil Points (Odd) (1==Na)
+Na = 15     # Number of Airfoil Points (Odd) (1==Na)
 
 # Wing Parameter
 b = 10.0         # Wing Span
 Lambda = 1.0    # Taper Ratio
 theta = 0.0    # Sweep Angle in Degree
 cr = 1.0        # Chord Root
-Np = 21         # Number of Airfoil Section (Odd)
-Sw = b*cr
+Np = 11         # Number of Airfoil Section (Odd)
 
 Sw = b*cr
 

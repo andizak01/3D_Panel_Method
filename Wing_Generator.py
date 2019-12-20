@@ -301,6 +301,7 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
     px = np.reshape(px,(-1))
     py = np.reshape(py,(-1))
     pz = np.reshape(pz,(-1))
+
     ox = np.reshape(ox,(-1))
     oy = np.reshape(oy,(-1))
     oz = np.reshape(oz,(-1))
