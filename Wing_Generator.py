@@ -297,6 +297,10 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
     ux = np.reshape(ux,(-1))
     uy = np.reshape(uy,(-1))
     uz = np.reshape(uz,(-1))
+    
+    px = np.reshape(px,(-1))
+    py = np.reshape(py,(-1))
+    pz = np.reshape(pz,(-1))
 
     ox = np.reshape(ox,(-1))
     oy = np.reshape(oy,(-1))
@@ -329,5 +333,4 @@ def Panel_Wing(Na,Np,x,y,z,xwake,ywake,zwake):
             Zwake[i][j] = (cx[j]-cxwake[i])*nxwake[i]+(cy[j]-cywake[i])*nywake[i]+(cz[j]-czwake[i])*nzwake[i]
     
     # Return Values 
-    return cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z,x1w,x2w,x3w,x4w,y1w,y2w,y3w,y4w,Swake,Xwake,Ywake,Zwake
-
+    return cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,ux,uy,uz,px,py,pz,ox,oy,oz,X,Y,Z,x1w,x2w,x3w,x4w,y1w,y2w,y3w,y4w,Swake,Xwake,Ywake,Zwake
