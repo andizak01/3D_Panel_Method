@@ -14,7 +14,7 @@ import calculate_cp
 # Global Input Parameter
 mu = 1.0    # Kinematic Viscosity
 U_inf = 1.0 # Freestream Velocity
-alpha = 5.0 # AoA in Degree
+alpha = 0.0 # AoA in Degree
 alpha = alpha*math.pi/180.0 # Convert AoA to radian
 beta = 0.0
 beta = beta*math.pi/180.0
@@ -119,7 +119,7 @@ ql,qm,v,cp,CX,CY,CZ,ql,qo,gu,go = calculate_cp.output(N_panel,Np,cx,cy,cz,panels
 n_plot = int((Na-1)/2)
 n_plot1 = (Na-1)
 #Upper part
-fig = plt.figure()
+fig = plt.figure(7)
 plt.contourf(cy_mat[0:n_plot,:],cx_mat[0:n_plot,:],cp[0:n_plot,:],20,cmap=cm.jet)
 plt.title('Cp distribution upper wing')
 plt.xlabel('y')
@@ -127,7 +127,7 @@ plt.ylabel('x')
 plt.colorbar()
 
 #Lower part
-fig = plt.figure()
+fig = plt.figure(8)
 plt.contourf(cy_mat[n_plot:n_plot1,:],cx_mat[n_plot:n_plot1,:],cp[n_plot:n_plot1,:],20,cmap=cm.jet)
 plt.title('Cp distribution lower wing')
 plt.xlabel('y')
@@ -137,7 +137,7 @@ plt.colorbar()
 n_span = Np-2
 
 #Plot cp di tengah sayap
-fig = plt.figure()
+fig = plt.figure(9)
 plt.plot(cx_mat[0:n_plot,5],cp[0:n_plot,5])
 plt.plot(cx_mat[n_plot:n_plot1,5],cp[n_plot:n_plot1,5])
 plt.gca().invert_yaxis()
@@ -145,7 +145,7 @@ plt.xlabel('x')
 plt.ylabel('-cp')
 
 #Plot cp di kiri sayap
-fig = plt.figure(7)
+fig = plt.figure(10)
 plt.plot(cx_mat[0:n_plot,0],cp[0:n_plot,0])
 plt.plot(cx_mat[n_plot:n_plot1,0],cp[n_plot:n_plot1,0])
 plt.gca().invert_yaxis()
@@ -153,7 +153,7 @@ plt.xlabel('x')
 plt.ylabel('-cp')
 
 #Plot cp di kanan sayap
-fig = plt.figure(8)
+fig = plt.figure(11)
 plt.plot(cx_mat[0:n_plot,n_span],cp[0:n_plot,n_span])
 plt.plot(cx_mat[n_plot:n_plot1,n_span],cp[n_plot:n_plot1,n_span])
 plt.gca().invert_yaxis()
