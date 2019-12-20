@@ -6,6 +6,7 @@ from matplotlib import cm
 
 import Airfoil_Generator
 import Wing_Generator
+import calculate_cp
 
 from funclass import Freestream, Panel, calculate_sigma, influence_coeff, wake_influence_coeff
 
@@ -14,19 +15,27 @@ mu = 1.0    # Kinematic Viscosity
 U_inf = 1.0 # Freestream Velocity
 alpha = 0.0 # AoA in Degree
 alpha = alpha*math.pi/180.0 # Convert AoA to radian
+beta = 0.0
+beta = beta*math.pi/180.0
+ro = 1.122
+q = 0.5*ro*numpy.power(U_inf,2)
+Vx = U_inf*numpy.cos(alpha)*numpy.cos(beta)
+Vy = U_inf*numpy.sin(beta)
+Vz = U_inf*numpy.cos(beta)*numpy.sin(alpha)
 
 # Airfoil Parameter (NACA 4-digit)
 m = 0/100   # Maximum Camber
 p = 0/100  # Location of Maximum Camber
 t = 12/100  # Maximum Thickness
-Na = 15     # Number of Airfoil Points (Odd) (1==Na)
+Na = 21     # Number of Airfoil Points (Odd) (1==Na)
 
 # Wing Parameter
 b = 2.0         # Wing Span
 Lambda = 1.0    # Taper Ratio
 theta = 0.0    # Sweep Angle in Degree
 cr = 1.0        # Chord Root
-Np = 11         # Number of Airfoil Section (Odd)
+Np = 21         # Number of Airfoil Section (Odd)
+Sw = b*cr
 
 ct = Lambda*cr # Chord Tip
 theta = theta*math.pi/180.0 # Convert Sweep Angle to radian
@@ -36,7 +45,7 @@ xa,ya = Airfoil_Generator.NACA4Digit(Na,m,p,t)              # Output : Airfoil C
 
 # 2. Create Wing and Panel
 xw,yw,zw,xwake,ywake,zwake = Wing_Generator.Geo_Wing(xa,ya,Np,b,cr,ct,theta)  # Output : Wing Coordinate (x,y,z)
-cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wake,y2_wake,y3_wake,y4_wake,S_wake,X_wake,Y_wake,Z_wake = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw,xwake,ywake,zwake) 
+cx,cy,cz,x1,x2,x3,x4,y1,y2,y3,y4,S,nx,ny,nz,ux,uy,uz,px,py,pz,ox,oy,oz,X,Y,Z, x1_wake,x2_wake,x3_wake,x4_wake,y1_wake,y2_wake,y3_wake,y4_wake,S_wake,X_wake,Y_wake,Z_wake = Wing_Generator.Panel_Wing(Na,Np,xw,yw,zw,xwake,ywake,zwake) 
 
 # 3. Panel Objects, Influence Coefficients, Singularities Strength 
 # 3.1 Wing Panels
@@ -105,9 +114,11 @@ plt.show()
 ql,qm,v,cp,CX,CY,CZ,ql,qo,gu,go = calculate_cp.output(N_panel,Np,cx,cy,cz,panels,ux,uy,uz,px,py,pz,ox,oy,oz,nx,ny,nz,U_inf,Vx,Vy,Vz,S,Sw,q,b,cr)
 # print([panel.myu for panel in panels_mat[:,Np12]])
 
+n_plot = int((Na-1)/2)
+n_plot1 = (Na-1)
 #Upper part
 fig = plt.figure()
-plt.contourf(cy_mat[0:25,:],cx_mat[0:25,:],cp[0:25,:],20,cmap=cm.jet)
+plt.contourf(cy_mat[0:n_plot,:],cx_mat[0:n_plot,:],cp[0:n_plot,:],20,cmap=cm.jet)
 plt.title('Cp distribution upper wing')
 plt.xlabel('y')
 plt.ylabel('x')
@@ -115,8 +126,12 @@ plt.colorbar()
 
 #Lower part
 fig = plt.figure()
-plt.contourf(cy_mat[25:50,:],cx_mat[25:50,:],cp[25:50,:],20,cmap=cm.jet)
+plt.contourf(cy_mat[n_plot:n_plot1,:],cx_mat[n_plot:n_plot1,:],cp[n_plot:n_plot1,:],20,cmap=cm.jet)
 plt.title('Cp distribution lower wing')
 plt.xlabel('y')
 plt.ylabel('x')
 plt.colorbar()
+
+#Plot cp di tengah sayap
+fig = plt.figure()
+plt.plot()
